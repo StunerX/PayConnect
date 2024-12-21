@@ -29,4 +29,20 @@ public class PaymentGatewayTests
         exception.Message.Should().Be("Name is required (Parameter 'name')");
     }
     
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(null)]
+    public void Create_ShouldThrowException_WhenBaseUriIsInvalid(string baseUrl)
+    {
+        // Arrange
+        const string validName = "Stripe";
+        var validImageUrl = "https://example.com/stripe-logo.png";
+
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentException>(() =>
+            PaymentGateway.Create(validName, baseUrl, validImageUrl));
+
+        exception.Message.Should().Be("BaseUrl is required (Parameter 'baseUrl')");
+    }
 }
