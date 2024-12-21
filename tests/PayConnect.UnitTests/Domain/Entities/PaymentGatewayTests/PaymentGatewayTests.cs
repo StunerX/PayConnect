@@ -6,7 +6,7 @@ namespace PayConnect.UnitTests.Domain.Entities.PaymentGatewayTests;
 public class PaymentGatewayTests
 {
     [Fact]
-    public void ShouldCreatePaymentGateway()
+    public void Create_ShouldReturnValidEntity_WhenAllFieldsAreCorrect()
     {
         var paymentGateway = PaymentGateway.Create("PicPay", "https://picpay.com", "image.png");
         
@@ -16,4 +16,6 @@ public class PaymentGatewayTests
         paymentGateway.Image.Should().Be("image.png");
         paymentGateway.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromMilliseconds(50));
     }
+    
+   
 }
