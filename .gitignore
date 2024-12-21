@@ -1,0 +1,50 @@
+# Ignorar binários e arquivos de build
+bin/
+obj/
+
+# Ignorar arquivos de usuário do Visual Studio
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignorar arquivos gerados pelo Rider ou JetBrains
+.idea/
+*.DotSettings
+*.DotSettings.user
+
+# Ignorar configurações do Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Ignorar logs, debug e arquivos temporários
+*.log
+**/logs/
+*.pid
+*.dump
+
+# Ignorar configurações do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos do Docker
+.dockerignore
+docker-compose.override.yml
+
+# Ignorar dependências locais e caches
+node_modules/
+*.cache
+*.temp
+
+# NÃO ignorar o diretório de migrações
+#!Migrations/
+
+# Ignorar arquivos do git local
+.git/
+
+# Ignorar appsettings locais (opcional, apenas se conter segredos)
+appsettings.Development.json
+launchSettings.json
+
+*.http

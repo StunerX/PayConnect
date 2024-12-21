@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5034971D-9510-4465-AE2F-C860925CA43D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D726C854-1E14-4B7B-9B01-17A2603C12B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Domain", "1 - Domain", "{BAD192CF-B548-432B-B830-84808BDA2233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Domain", "src\PayConnect.Domain\PayConnect.Domain.csproj", "{312E660F-069D-47E8-B5AF-40AF7BEDDB22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{035C5C0A-EAAF-4CD0-A95F-2F7E7712775C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infrastructure", "3 - Infrastructure", "{E4D75F84-D07A-4F7C-A419-8198D4955687}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Presentation", "4 - Presentation", "{A1293704-842D-4011-99D7-4EA2165F0845}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Application", "src\PayConnect.Application\PayConnect.Application.csproj", "{EFA6CB5C-3B69-4186-9CAC-CB848B44CF63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Infrastructure.EntityFramework", "src\PayConnect.Infrastructure.EntityFramework\PayConnect.Infrastructure.EntityFramework.csproj", "{AEDC8A8C-0CB0-4313-873C-8324B4B719FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Infrastructure.ExternalServices", "src\PayConnect.Infrastructure.ExternalServices\PayConnect.Infrastructure.ExternalServices.csproj", "{27D53A67-77F4-47BF-BBB1-A29C656FC7D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Payment.WebApi", "src\PayConnect.Payment.WebApi\PayConnect.Payment.WebApi.csproj", "{5D60F5B4-EBF9-4123-BE64-EC84E4FCC5A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{260CC964-4BCA-4822-B194-DBD8BFE4F222}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Transaction.WebApi", "src\PayConnect.Transaction.WebApi\PayConnect.Transaction.WebApi.csproj", "{A96C1A53-BEEE-4545-A9A4-026B1AD003F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.UnitTests", "tests\PayConnect.UnitTests\PayConnect.UnitTests.csproj", "{CC85246B-6EFD-4465-AC73-E7D9CA868BB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BAD192CF-B548-432B-B830-84808BDA2233} = {5034971D-9510-4465-AE2F-C860925CA43D}
+		{312E660F-069D-47E8-B5AF-40AF7BEDDB22} = {BAD192CF-B548-432B-B830-84808BDA2233}
+		{035C5C0A-EAAF-4CD0-A95F-2F7E7712775C} = {5034971D-9510-4465-AE2F-C860925CA43D}
+		{E4D75F84-D07A-4F7C-A419-8198D4955687} = {5034971D-9510-4465-AE2F-C860925CA43D}
+		{A1293704-842D-4011-99D7-4EA2165F0845} = {5034971D-9510-4465-AE2F-C860925CA43D}
+		{EFA6CB5C-3B69-4186-9CAC-CB848B44CF63} = {035C5C0A-EAAF-4CD0-A95F-2F7E7712775C}
+		{AEDC8A8C-0CB0-4313-873C-8324B4B719FC} = {E4D75F84-D07A-4F7C-A419-8198D4955687}
+		{27D53A67-77F4-47BF-BBB1-A29C656FC7D2} = {E4D75F84-D07A-4F7C-A419-8198D4955687}
+		{5D60F5B4-EBF9-4123-BE64-EC84E4FCC5A1} = {A1293704-842D-4011-99D7-4EA2165F0845}
+		{A96C1A53-BEEE-4545-A9A4-026B1AD003F3} = {A1293704-842D-4011-99D7-4EA2165F0845}
+		{CC85246B-6EFD-4465-AC73-E7D9CA868BB6} = {D726C854-1E14-4B7B-9B01-17A2603C12B2}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{312E660F-069D-47E8-B5AF-40AF7BEDDB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312E660F-069D-47E8-B5AF-40AF7BEDDB22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312E660F-069D-47E8-B5AF-40AF7BEDDB22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312E660F-069D-47E8-B5AF-40AF7BEDDB22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA6CB5C-3B69-4186-9CAC-CB848B44CF63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA6CB5C-3B69-4186-9CAC-CB848B44CF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA6CB5C-3B69-4186-9CAC-CB848B44CF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA6CB5C-3B69-4186-9CAC-CB848B44CF63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEDC8A8C-0CB0-4313-873C-8324B4B719FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEDC8A8C-0CB0-4313-873C-8324B4B719FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEDC8A8C-0CB0-4313-873C-8324B4B719FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEDC8A8C-0CB0-4313-873C-8324B4B719FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D53A67-77F4-47BF-BBB1-A29C656FC7D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D53A67-77F4-47BF-BBB1-A29C656FC7D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D53A67-77F4-47BF-BBB1-A29C656FC7D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D53A67-77F4-47BF-BBB1-A29C656FC7D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D60F5B4-EBF9-4123-BE64-EC84E4FCC5A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D60F5B4-EBF9-4123-BE64-EC84E4FCC5A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D60F5B4-EBF9-4123-BE64-EC84E4FCC5A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D60F5B4-EBF9-4123-BE64-EC84E4FCC5A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A96C1A53-BEEE-4545-A9A4-026B1AD003F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A96C1A53-BEEE-4545-A9A4-026B1AD003F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A96C1A53-BEEE-4545-A9A4-026B1AD003F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A96C1A53-BEEE-4545-A9A4-026B1AD003F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC85246B-6EFD-4465-AC73-E7D9CA868BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC85246B-6EFD-4465-AC73-E7D9CA868BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC85246B-6EFD-4465-AC73-E7D9CA868BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC85246B-6EFD-4465-AC73-E7D9CA868BB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+﻿services:
+  payconnect.payment.webapi:
+    image: payconnect.payment.webapi
+    build:
+      context: .
+      dockerfile: src/PayConnect.Payment.WebApi/Dockerfile
+
+  payconnect.transaction.webapi:
+    image: payconnect.transaction.webapi
+    build:
+      context: .
+      dockerfile: src/PayConnect.Transaction.WebApi/Dockerfile
