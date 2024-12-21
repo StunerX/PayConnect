@@ -45,4 +45,22 @@ public class PaymentGatewayTests
 
         exception.Message.Should().Be("BaseUrl is required (Parameter 'baseUrl')");
     }
+    
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(null)]
+    public void Create_ShouldThrowException_WhenImageUrlIsNullOrEmpty(string validImageUrl)
+    {
+        const string validName = "Stripe";
+        var baseUrl = "https://api.stripe.com";
+
+        var action = () => PaymentGateway.Create(validName, baseUrl, validImageUrl);
+        
+        action.Should()
+            .Throw<ArgumentException>()
+            .WithMessage("Image is required (Parameter 'Image')")
+            .And.ParamName.Should().Be("image");
+        
+    }
 }
