@@ -10,4 +10,8 @@
       <ProjectReference Include="..\PayConnect.Domain\PayConnect.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.1" />
+    </ItemGroup>
+
 </Project>
