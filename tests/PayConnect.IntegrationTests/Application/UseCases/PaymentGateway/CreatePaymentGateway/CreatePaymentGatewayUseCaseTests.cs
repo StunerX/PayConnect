@@ -31,7 +31,7 @@ public class CreatePaymentGatewayUseCaseTests(CreatePaymentGatewayUseCaseTestsFi
         response.HasError.Should().BeFalse();
         response.Error.Should().BeNull();
         response.Data.Should().NotBeNull();
-        response.Data.Id.Should().NotBeEmpty();
+        response.Data!.Id.Should().NotBeEmpty();
 
     }
 }

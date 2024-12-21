@@ -26,7 +26,7 @@ public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewaySer
         var paymentGateway = await unitOfWork.PaymentGatewayRepository.FirstAsync(x => x.Id == outModel.Id);
        
         paymentGateway.Should().NotBeNull();
-        paymentGateway.Name.Should().Be("Cielo");
+        paymentGateway!.Name.Should().Be("Cielo");
         paymentGateway.BaseUrl.Should().Be("http://test.com");
         paymentGateway.Image.Should().Be("test.png");
     }
