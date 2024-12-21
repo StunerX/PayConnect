@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\PayConnect.Domain\PayConnect.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

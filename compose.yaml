@@ -10,3 +10,14 @@
     build:
       context: .
       dockerfile: src/PayConnect.Transaction.WebApi/Dockerfile
+      
+  db:
+    container_name: payconnect_payment_db
+    hostname: payconnect_payment_db
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: payconnect_payment_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "15432:5432"
