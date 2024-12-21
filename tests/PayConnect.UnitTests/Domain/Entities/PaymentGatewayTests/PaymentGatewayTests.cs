@@ -26,7 +26,7 @@ public class PaymentGatewayTests
 
         var exception = Assert.Throws<ArgumentException>(() => PaymentGateway.Create(invalidName, validBaseUri, validImageUrl));
 
-        Assert.Equal("Name is required (Parameter 'name')", exception.Message);
+        exception.Message.Should().Be("Name is required (Parameter 'name')");
     }
     
 }
