@@ -17,5 +17,16 @@ public class PaymentGatewayTests
         paymentGateway.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromMilliseconds(50));
     }
     
-   
+    [Fact]
+    public void Create_ShouldThrowException_WhenNameIsNullOrEmpty()
+    {
+        string? invalidName = null;
+        const string validBaseUri = "https://api.stripe.com";
+        var validImageUrl = "https://example.com/stripe-logo.png";
+
+        var exception = Assert.Throws<ArgumentException>(() => PaymentGateway.Create(invalidName, validBaseUri, validImageUrl));
+
+        Assert.Equal("Name is required (Parameter 'name')", exception.Message);
+    }
+    
 }
