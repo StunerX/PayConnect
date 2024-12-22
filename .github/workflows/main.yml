@@ -54,11 +54,11 @@ jobs:
       # Build das imagens Docker
       - name: Build Docker images
         run: |
-          docker build -t seu-usuario/payconnect-payment-webapi:latest -f src/PayConnect.Payment.WebApi/Dockerfile .
-          docker build -t seu-usuario/payconnect-transaction-webapi:latest -f src/PayConnect.Transaction.WebApi/Dockerfile .
+          docker build -t cleytonsantos/payconnect-payment-webapi:latest -f src/PayConnect.Payment.WebApi/Dockerfile .
+          docker build -t cleytonsantos/payconnect-transaction-webapi:latest -f src/PayConnect.Transaction.WebApi/Dockerfile .
 
       # Push das imagens para o Docker Hub
       - name: Push Docker images
         run: |
-          docker push seu-usuario/payconnect-payment-webapi:latest
-          docker push seu-usuario/payconnect-transaction-webapi:latest
+          docker push cleytonsantos/payconnect-payment-webapi:latest
+          docker push cleytonsantos/payconnect-transaction-webapi:latest
