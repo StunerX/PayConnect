@@ -84,16 +84,19 @@ jobs:
           # Criar o arquivo ZIP usando .ebignore
           zip -r app.zip . -x@.ebignore
 
+          # Definir um nome de versão único baseado no timestamp
+          VERSION_LABEL="app-$(date +%Y%m%d%H%M%S)"
+
           # Upload do ZIP para o bucket correto
           aws s3 cp app.zip s3://elasticbeanstalk-us-east-1-211965390284/PayConnect-env/
 
           # Registrar uma nova versão do aplicativo
           aws elasticbeanstalk create-application-version \
             --application-name PayConnect-env \
-            --version-label app-v1 \
+            --version-label "$VERSION_LABEL" \
             --source-bundle S3Bucket="elasticbeanstalk-us-east-1-211965390284",S3Key="PayConnect-env/app.zip"
 
-          # Atualizar o ambiente Elastic Beanstalk
+          # Atualizar o ambiente Elastic Beanstalk com a nova versão
           aws elasticbeanstalk update-environment \
             --environment-name PayConnect-env \
-            --version-label app-v1
+            --version-label "$VERSION_LABEL"
