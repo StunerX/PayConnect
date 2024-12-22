@@ -13,25 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout do código
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Configurar versão do .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      # Restaurar dependências
       - name: Restore dependencies
         run: dotnet restore
 
-      # Build do projeto
       - name: Build project
         run: dotnet build --configuration Release --no-restore
 
-      # Rodar testes
       - name: Run tests
         run: dotnet test --configuration Release --no-restore
 
@@ -40,24 +35,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout do código
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Logar no Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Build das imagens Docker
       - name: Build Docker images
         run: |
           docker build -t cleytonsantos/payconnect-payment-webapi:latest -f src/PayConnect.Payment.WebApi/Dockerfile .
           docker build -t cleytonsantos/payconnect-transaction-webapi:latest -f src/PayConnect.Transaction.WebApi/Dockerfile .
 
-      # Push das imagens para o Docker Hub
       - name: Push Docker images
         run: |
           docker push cleytonsantos/payconnect-payment-webapi:latest
@@ -68,11 +59,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout do código
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Configurar credenciais AWS
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -80,31 +69,28 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      # Instalar Elastic Beanstalk CLI
       - name: Install Elastic Beanstalk CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install awsebcli --upgrade
 
-      # Deploy para Elastic Beanstalk
       - name: Deploy to Elastic Beanstalk
         run: |
-          # Inicializar e usar o ambiente
           eb init -p docker PayConnect-env --region ${{ secrets.AWS_REGION }}
           eb use PayConnect-env
 
-          # Criar o artefato e fazer o upload para S3
-          zip -r app.zip .
+          # Criação do arquivo ZIP usando .ebignore
+          zip -r app.zip . -x@.ebignore
           aws s3 cp app.zip s3://elasticbeanstalk-${{ secrets.AWS_REGION }}-<account-id>/PayConnect-env/
 
-          # Registrar uma nova versão do aplicativo
+          # Registrar nova versão no Elastic Beanstalk
           aws elasticbeanstalk create-application-version \
             --application-name PayConnect-env \
             --version-label app-v1 \
             --source-bundle S3Bucket="elasticbeanstalk-${{ secrets.AWS_REGION }}-<account-id>",S3Key="PayConnect-env/app.zip"
 
-          # Atualizar o ambiente para usar a nova versão
+          # Atualizar o ambiente Elastic Beanstalk
           aws elasticbeanstalk update-environment \
             --environment-name PayConnect-env \
             --version-label app-v1
