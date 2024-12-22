@@ -81,20 +81,20 @@ jobs:
           eb init -p docker PayConnect-env --region ${{ secrets.AWS_REGION }}
           eb use PayConnect-env
 
-          # Criar o arquivo ZIP usando .ebignore
-          zip -r app.zip . -x@.ebignore
-
           # Definir um nome de versão único baseado no timestamp
           VERSION_LABEL="app-$(date +%Y%m%d%H%M%S)"
+          
+          # Criar o arquivo ZIP usando .ebignore
+          zip -r "$VERSION_LABEL.zip" . -x@.ebignore
 
           # Upload do ZIP para o bucket correto
-          aws s3 cp app.zip s3://elasticbeanstalk-us-east-1-211965390284/PayConnect-env/
+          aws s3 cp "$VERSION_LABEL.zip" s3://elasticbeanstalk-us-east-1-211965390284/PayConnect-env/
 
           # Registrar uma nova versão do aplicativo
           aws elasticbeanstalk create-application-version \
             --application-name PayConnect-env \
             --version-label "$VERSION_LABEL" \
-            --source-bundle S3Bucket="elasticbeanstalk-us-east-1-211965390284",S3Key="PayConnect-env/app.zip"
+            --source-bundle S3Bucket="elasticbeanstalk-us-east-1-211965390284",S3Key="PayConnect-env/$VERSION_LABEL.zip"
 
           # Atualizar o ambiente Elastic Beanstalk com a nova versão
           aws elasticbeanstalk update-environment \
