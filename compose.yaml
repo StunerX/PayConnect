@@ -4,13 +4,20 @@
     build:
       context: .
       dockerfile: src/PayConnect.Payment.WebApi/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    networks:
+      - payconnect_network
+    depends_on:
+      - db
 
   payconnect.transaction.webapi:
     image: payconnect.transaction.webapi
     build:
       context: .
       dockerfile: src/PayConnect.Transaction.WebApi/Dockerfile
-      
+
   db:
     container_name: payconnect_payment_db
     hostname: payconnect_payment_db
@@ -21,3 +28,9 @@
       POSTGRES_PASSWORD: admin
     ports:
       - "15432:5432"
+    networks:
+      - payconnect_network
+  
+networks:
+  payconnect_network:
+    driver: bridge

@@ -10,8 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Docker.DotNet" Version="3.125.15" />
         <PackageReference Include="FluentAssertions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0"/>
         <PackageReference Include="xunit" Version="2.4.2"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\PayConnect.Application\PayConnect.Application.csproj" />
+      <ProjectReference Include="..\..\src\PayConnect.Payment.WebApi\PayConnect.Payment.WebApi.csproj" />
       <ProjectReference Include="..\PayConnect.Tests.Shared\PayConnect.Tests.Shared.csproj" />
     </ItemGroup>
 

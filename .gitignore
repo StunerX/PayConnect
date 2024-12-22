@@ -48,3 +48,4 @@ appsettings.Development.json
 launchSettings.json
 
 *.http
+*.vs
