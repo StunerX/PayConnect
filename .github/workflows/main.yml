@@ -77,23 +77,23 @@ jobs:
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          # Inicializar o ambiente
+          # Inicializar e usar o ambiente Elastic Beanstalk
           eb init -p docker PayConnect-env --region ${{ secrets.AWS_REGION }}
           eb use PayConnect-env
 
           # Criar o arquivo ZIP usando .ebignore
           zip -r app.zip . -x@.ebignore
 
-          # Upload para o bucket S3
-          aws s3 cp app.zip s3://elasticbeanstalk-${{ secrets.AWS_REGION }}-${{ secrets.AWS_ACCOUNT_ID }}/PayConnect-env/
+          # Upload do ZIP para o bucket correto
+          aws s3 cp app.zip s3://elasticbeanstalk-us-east-1-211965390284/PayConnect-env/
 
           # Registrar uma nova versão do aplicativo
           aws elasticbeanstalk create-application-version \
             --application-name PayConnect-env \
             --version-label app-v1 \
-            --source-bundle S3Bucket="elasticbeanstalk-${{ secrets.AWS_REGION }}-${{ secrets.AWS_ACCOUNT_ID }}",S3Key="PayConnect-env/app.zip"
+            --source-bundle S3Bucket="elasticbeanstalk-us-east-1-211965390284",S3Key="PayConnect-env/app.zip"
 
-          # Atualizar o ambiente do Elastic Beanstalk
+          # Atualizar o ambiente Elastic Beanstalk
           aws elasticbeanstalk update-environment \
             --environment-name PayConnect-env \
             --version-label app-v1
