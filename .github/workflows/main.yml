@@ -62,3 +62,33 @@ jobs:
         run: |
           docker push cleytonsantos/payconnect-payment-webapi:latest
           docker push cleytonsantos/payconnect-transaction-webapi:latest
+
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Configurar credenciais AWS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Instalar Elastic Beanstalk CLI
+      - name: Install Elastic Beanstalk CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install awsebcli --upgrade
+
+      # Deploy para Elastic Beanstalk
+      - name: Deploy to Elastic Beanstalk
+        run: |
+          eb init -p docker PayConnect-env --region ${{ secrets.AWS_REGION }}
+          eb deploy
