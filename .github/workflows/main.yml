@@ -96,6 +96,22 @@ jobs:
             --version-label "$VERSION_LABEL" \
             --source-bundle S3Bucket="elasticbeanstalk-us-east-1-211965390284",S3Key="PayConnect-env/$VERSION_LABEL.zip"
 
+          # Aguardar até que a versão seja processada
+          while true; do
+            STATUS=$(aws elasticbeanstalk describe-application-versions \
+              --application-name PayConnect-env \
+              --version-label "$VERSION_LABEL" \
+              --query "ApplicationVersions[0].Status" --output text)
+            
+            if [ "$STATUS" == "PROCESSED" ]; then
+              echo "Application version $VERSION_LABEL is processed."
+              break
+            fi
+
+            echo "Waiting for application version $VERSION_LABEL to be processed..."
+            sleep 10
+          done
+
           # Atualizar o ambiente Elastic Beanstalk com a nova versão
           aws elasticbeanstalk update-environment \
             --environment-name PayConnect-env \
