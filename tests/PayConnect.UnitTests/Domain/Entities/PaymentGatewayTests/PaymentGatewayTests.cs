@@ -1,5 +1,6 @@
 using FluentAssertions;
 using PayConnect.Domain.Entities;
+using PayConnect.Domain.Exceptions;
 
 namespace PayConnect.UnitTests.Domain.Entities.PaymentGatewayTests;
 
@@ -24,9 +25,8 @@ public class PaymentGatewayTests
         const string validBaseUri = "https://api.stripe.com";
         var validImageUrl = "https://example.com/stripe-logo.png";
 
-        var exception = Assert.Throws<ArgumentException>(() => PaymentGateway.Create(invalidName, validBaseUri, validImageUrl));
-
-        exception.Message.Should().Be("Name is required (Parameter 'name')");
+        var action = () => PaymentGateway.Create(invalidName, validBaseUri, validImageUrl);
+        action.Should().Throw<DomainException>().WithMessage("Name is required");
     }
     
     [Theory]
@@ -35,15 +35,12 @@ public class PaymentGatewayTests
     [InlineData(null)]
     public void Create_ShouldThrowException_WhenBaseUriIsInvalid(string baseUrl)
     {
-        // Arrange
         const string validName = "Stripe";
         var validImageUrl = "https://example.com/stripe-logo.png";
 
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() =>
-            PaymentGateway.Create(validName, baseUrl, validImageUrl));
+        var action = () => PaymentGateway.Create(validName, baseUrl, validImageUrl);
 
-        exception.Message.Should().Be("BaseUrl is required (Parameter 'baseUrl')");
+        action.Should().Throw<DomainException>().WithMessage("BaseUrl is required");
     }
     
     [Theory]
@@ -56,11 +53,8 @@ public class PaymentGatewayTests
         var baseUrl = "https://api.stripe.com";
 
         var action = () => PaymentGateway.Create(validName, baseUrl, validImageUrl);
-        
-        action.Should()
-            .Throw<ArgumentException>()
-            .WithMessage("Image is required (Parameter 'Image')")
-            .And.ParamName.Should().Be("image");
-        
+
+        action.Should().Throw<DomainException>().WithMessage("Image is required");
+
     }
 }

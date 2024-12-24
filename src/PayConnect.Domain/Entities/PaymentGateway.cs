@@ -1,3 +1,5 @@
+using PayConnect.Domain.Exceptions;
+
 namespace PayConnect.Domain.Entities;
 
 public class PaymentGateway
@@ -30,13 +32,13 @@ public class PaymentGateway
     private static void Validate(string name, string baseUrl, string image)
     {
         if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Name is required", nameof(name));
+            throw new DomainException("Name is required");
         
         if (string.IsNullOrWhiteSpace(baseUrl))
-            throw new ArgumentException("BaseUrl is required", nameof(baseUrl));
+            throw new DomainException("BaseUrl is required");
         
         if (string.IsNullOrWhiteSpace(image))
-            throw new ArgumentException("Image is required", nameof(image));
+            throw new DomainException("Image is required");
     } 
     
 }
