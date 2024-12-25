@@ -13,7 +13,7 @@ public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsFixture fi
     {
         await fixture.CreateE2EDatabaseAsync();
 
-        var request = new CreatePaymentGatewayRequest
+        var request = new CreatePaymentGatewayCommand
         {
             Data = new CreatePaymentGatewayInModel
             {
@@ -35,12 +35,9 @@ public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsFixture fi
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         
-        var responseModel = JsonSerializer.Deserialize<CreatePaymentGatewayResponse>(contentString, options);
+        var responseModel = JsonSerializer.Deserialize<CreatePaymentGatewayResult>(contentString, options);
 
-        responseModel!.Data.Should().NotBeNull();
-        responseModel.Data!.Id.Should().NotBeEmpty();
-        responseModel.Error.Should().BeNull();
-        responseModel.HasError.Should().BeFalse();
-        
+        responseModel.Should().NotBeNull();
+        responseModel!.Id.Should().NotBeEmpty();
     }
 }

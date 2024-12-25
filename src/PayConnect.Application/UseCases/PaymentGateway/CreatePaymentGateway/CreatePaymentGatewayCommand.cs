@@ -3,7 +3,7 @@ using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 
 namespace PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 
-public class CreatePaymentGatewayRequest : IRequest<CreatePaymentGatewayResponse>
+public class CreatePaymentGatewayCommand : IRequest<CreatePaymentGatewayResult>
 {
     public required CreatePaymentGatewayInModel Data { get; init; }
 }

@@ -18,7 +18,7 @@ public class CreatePaymentGatewayUseCaseTests(CreatePaymentGatewayUseCaseTestsFi
         
         var useCase = new CreatePaymentGatewayUseCase(paymentGatewayService);
 
-        var request = new CreatePaymentGatewayRequest
+        var request = new CreatePaymentGatewayCommand
         {
             Data = new CreatePaymentGatewayInModel
             {
@@ -30,10 +30,8 @@ public class CreatePaymentGatewayUseCaseTests(CreatePaymentGatewayUseCaseTestsFi
         
         var response = await useCase.Handle(request, CancellationToken.None);
 
-        response.HasError.Should().BeFalse();
-        response.Error.Should().BeNull();
-        response.Data.Should().NotBeNull();
-        response.Data!.Id.Should().NotBeEmpty();
+        response.Should().NotBeNull();
+        response.Id.Should().NotBeEmpty();
 
     }
 }

@@ -3,25 +3,13 @@ using PayConnect.Application.Interfaces;
 
 namespace PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 
-public class CreatePaymentGatewayUseCase(IPaymentGatewayService paymentGatewayService) : IRequestHandler<CreatePaymentGatewayRequest, CreatePaymentGatewayResponse>
+public class CreatePaymentGatewayUseCase(IPaymentGatewayService paymentGatewayService)
+    : IRequestHandler<CreatePaymentGatewayCommand, CreatePaymentGatewayResult>
 {
-    public async Task<CreatePaymentGatewayResponse> Handle(CreatePaymentGatewayRequest request, CancellationToken cancellationToken)
+    public async Task<CreatePaymentGatewayResult> Handle(CreatePaymentGatewayCommand command, CancellationToken cancellationToken)
     {
-        var response = new CreatePaymentGatewayResponse();
+        var outModel = await paymentGatewayService.CreateAsync(command.Data, cancellationToken);
 
-        try
-        {
-            response.Data = await paymentGatewayService.CreateAsync(request.Data, cancellationToken);
-
-            return response;
-        }
-        catch (Exception ex)
-        {
-            response.Data = null;
-            response.Error = ex.Message;
-            response.HasError = true;
-
-            return response;
-        }
+        return new CreatePaymentGatewayResult { Id = outModel.Id};
     }
 }

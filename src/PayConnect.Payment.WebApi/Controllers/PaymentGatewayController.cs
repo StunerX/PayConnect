@@ -9,9 +9,9 @@ namespace PayConnect.Payment.WebApi.Controllers;
 public class PaymentGatewayController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<CreatePaymentGatewayResponse>> Create(CreatePaymentGatewayRequest request)
+    public async Task<ActionResult<CreatePaymentGatewayResult>> Create(CreatePaymentGatewayCommand command)
     {
-        var result = await mediator.Send(request);
+        var result = await mediator.Send(command);
         return Ok(result);
     }
 }
