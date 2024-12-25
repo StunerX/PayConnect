@@ -13,7 +13,9 @@ public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewaySer
         var unitOfWork = fixture.CreateUnitOfWork(dbContext);
         var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService);
+        var mapper = fixture.CreateMapper();
+
+        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService, mapper);
 
         var inModel = new CreatePaymentGatewayInModel
         {
@@ -39,7 +41,8 @@ public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewaySer
         var unitOfWork = fixture.CreateUnitOfWork(dbContext);
         var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService);
+        var mapper = fixture.CreateMapper();
+        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService, mapper);
 
         var inModel = new CreatePaymentGatewayInModel
         {

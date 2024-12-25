@@ -1,9 +1,11 @@
+#nullable disable
 using MediatR;
-using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 
 namespace PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 
 public class CreatePaymentGatewayCommand : IRequest<CreatePaymentGatewayResult>
 {
-    public required CreatePaymentGatewayInModel Data { get; init; }
+    public string Name { get; set; }
+    public string BaseUrl { get; set; }
+    public string Image { get; set; }
 }

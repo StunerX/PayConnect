@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
       <PackageReference Include="Bogus" Version="35.6.1" />
       <PackageReference Include="Docker.DotNet" Version="3.125.15" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
@@ -15,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\PayConnect.Application\PayConnect.Application.csproj" />
       <ProjectReference Include="..\..\src\PayConnect.Infrastructure.EntityFramework\PayConnect.Infrastructure.EntityFramework.csproj" />
     </ItemGroup>
 

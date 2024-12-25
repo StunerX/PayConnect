@@ -1,15 +1,18 @@
+using AutoMapper;
 using MediatR;
+using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 using PayConnect.Application.Interfaces;
 
 namespace PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 
-public class CreatePaymentGatewayUseCase(IPaymentGatewayService paymentGatewayService)
+public class CreatePaymentGatewayUseCase(IPaymentGatewayService paymentGatewayService, IMapper mapper)
     : IRequestHandler<CreatePaymentGatewayCommand, CreatePaymentGatewayResult>
 {
     public async Task<CreatePaymentGatewayResult> Handle(CreatePaymentGatewayCommand command, CancellationToken cancellationToken)
     {
-        var outModel = await paymentGatewayService.CreateAsync(command.Data, cancellationToken);
+        var inModel = mapper.Map<CreatePaymentGatewayInModel>(command);
+        var outModel = await paymentGatewayService.CreateAsync(inModel, cancellationToken);
 
-        return new CreatePaymentGatewayResult { Id = outModel.Id};
+        return mapper.Map<CreatePaymentGatewayResult>(outModel);
     }
 }

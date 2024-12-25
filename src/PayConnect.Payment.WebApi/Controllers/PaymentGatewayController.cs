@@ -1,3 +1,4 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PayConnect.Application.Dto.PaymentGateway.Create.Input;
@@ -9,7 +10,7 @@ namespace PayConnect.Payment.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PaymentGatewayController(IMediator mediator) : ControllerBase
+public class PaymentGatewayController(IMediator mediator, IMapper mapper) : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -17,24 +18,10 @@ public class PaymentGatewayController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiResponse<string>))]
     public async Task<ActionResult<CreatePaymentGatewayResponse>> Create(CreatePaymentGatewayRequest request)
     {
-        var command = new CreatePaymentGatewayCommand
-        {
-            Data = new CreatePaymentGatewayInModel
-            {
-                Name = request.Name,
-                BaseUrl = request.BaseUrl,
-                Image = request.Image
-            }
-        };
+        var command = mapper.Map<CreatePaymentGatewayCommand>(request);
         var result = await mediator.Send(command);
         
-        var response = new CreatePaymentGatewayResponse
-        {
-            Id = result.Id,
-            Name = request.Name,
-            BaseUrl = request.BaseUrl,
-            Image = request.Image
-        };
+        var response = mapper.Map<CreatePaymentGatewayResponse>(result);
         
         return Created(string.Empty, response);
     }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 using PayConnect.Application.Dto.PaymentGateway.Create.Output;
 using PayConnect.Application.Interfaces;
@@ -6,7 +7,7 @@ using PayConnect.Domain.Interfaces;
 
 namespace PayConnect.Application.Services;
 
-public class PaymentGatewayService(IUnitOfWork unitOfWork, IPaymentGatewayDomainService domainService) : IPaymentGatewayService
+public class PaymentGatewayService(IUnitOfWork unitOfWork, IPaymentGatewayDomainService domainService, IMapper mapper) : IPaymentGatewayService
 {
     public async Task<CreatePaymentGatewayOutModel> CreateAsync(CreatePaymentGatewayInModel model, CancellationToken cancellationToken = default)
     {
@@ -16,6 +17,6 @@ public class PaymentGatewayService(IUnitOfWork unitOfWork, IPaymentGatewayDomain
         await unitOfWork.PaymentGatewayRepository.AddAsync(entity);
         await unitOfWork.CommitAsync();
         
-        return new CreatePaymentGatewayOutModel { Id = entity.Id};
+        return mapper.Map<CreatePaymentGatewayOutModel>(entity);
     }
 }

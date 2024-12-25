@@ -1,5 +1,7 @@
+using AutoMapper;
 using FluentAssertions;
 using PayConnect.Application.Dto.PaymentGateway.Create.Input;
+using PayConnect.Application.Mapping;
 using PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 
 namespace PayConnect.IntegrationTests.Application.UseCases.PaymentGateway.CreatePaymentGateway;
@@ -14,18 +16,17 @@ public class CreatePaymentGatewayUseCaseTests(CreatePaymentGatewayUseCaseTestsFi
         var unitOfWork = fixture.CreateUnitOfWork(dbContext);
         var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService);
+        var mapper = fixture.CreateMapper();
         
-        var useCase = new CreatePaymentGatewayUseCase(paymentGatewayService);
+        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService, mapper);
+        
+        var useCase = new CreatePaymentGatewayUseCase(paymentGatewayService, mapper);
 
         var request = new CreatePaymentGatewayCommand
         {
-            Data = new CreatePaymentGatewayInModel
-            {
-                Name = "Cielo",
-                BaseUrl = "http://test.com",
-                Image = "test.png"
-            }
+            Name = "Cielo",
+            BaseUrl = "http://test.com",
+            Image = "test.png"
         };
         
         var response = await useCase.Handle(request, CancellationToken.None);
