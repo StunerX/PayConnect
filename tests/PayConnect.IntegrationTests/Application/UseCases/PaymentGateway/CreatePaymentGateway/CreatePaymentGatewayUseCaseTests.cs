@@ -12,7 +12,9 @@ public class CreatePaymentGatewayUseCaseTests(CreatePaymentGatewayUseCaseTestsFi
     {
         var dbContext = fixture.CreateInMemoryDatabase();
         var unitOfWork = fixture.CreateUnitOfWork(dbContext);
-        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork);
+        var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
+        
+        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService);
         
         var useCase = new CreatePaymentGatewayUseCase(paymentGatewayService);
 

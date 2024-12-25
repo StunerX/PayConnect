@@ -11,8 +11,9 @@ public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewaySer
     {
         var dbContext = fixture.CreateInMemoryDatabase();
         var unitOfWork = fixture.CreateUnitOfWork(dbContext);
+        var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork);
+        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService);
 
         var inModel = new CreatePaymentGatewayInModel
         {
@@ -29,5 +30,28 @@ public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewaySer
         paymentGateway!.Name.Should().Be("Cielo");
         paymentGateway.BaseUrl.Should().Be("http://test.com");
         paymentGateway.Image.Should().Be("test.png");
+    }
+    
+    [Fact]
+    public async Task Should_Throw_DomainException_When_PaymentGateway_Exists()
+    {
+        var dbContext = fixture.CreateInMemoryDatabase();
+        var unitOfWork = fixture.CreateUnitOfWork(dbContext);
+        var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
+        
+        var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService);
+
+        var inModel = new CreatePaymentGatewayInModel
+        {
+            Name = "Cielo",
+            BaseUrl = "http://test.com",
+            Image = "test.png"
+        };
+        
+        await paymentGatewayService.CreateAsync(inModel, CancellationToken.None);
+
+        var act = async () => await paymentGatewayService.CreateAsync(inModel, CancellationToken.None);
+        
+        await act.Should().ThrowAsync<Domain.Exceptions.DomainException>().WithMessage("Payment gateway already exists");
     }
 }
