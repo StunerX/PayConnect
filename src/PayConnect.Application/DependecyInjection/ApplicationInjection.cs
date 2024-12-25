@@ -16,6 +16,8 @@ public static class ApplicationInjection
         services.AddServices();
         services.AddScoped<HttpClient>();
         
+        services.AddAutoMapper(typeof(ApplicationInjection).Assembly);
+        
         return services;
     }
 }

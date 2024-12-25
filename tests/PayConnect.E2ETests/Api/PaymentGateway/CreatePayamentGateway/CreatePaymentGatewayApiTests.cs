@@ -1,7 +1,9 @@
+using System.Net;
 using System.Text.Json;
 using FluentAssertions;
 using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 using PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
+using PayConnect.Payment.WebApi.Contracts.PaymentGateway.Create;
 
 namespace PayConnect.E2ETests.Api.PaymentGateway.CreatePayamentGateway;
 
@@ -15,18 +17,15 @@ public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsFixture fi
 
         var request = new CreatePaymentGatewayRequest
         {
-            Data = new CreatePaymentGatewayInModel
-            {
-                Name = "Test",
-                BaseUrl = "Test",
-                Image = "Test",
-            }
+            Name = "Test",
+            BaseUrl = "Test",
+            Image = "Test",
         };
 
         var client = fixture.ApiClient;
 
         var response = await client.PostAsync("/PaymentGateway", request);
-        response.EnsureSuccessStatusCode();
+        response.StatusCode.Should().Be(HttpStatusCode.Created);
         
         var contentString = await response.Content.ReadAsStringAsync();
         
@@ -35,12 +34,9 @@ public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsFixture fi
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         
-        var responseModel = JsonSerializer.Deserialize<CreatePaymentGatewayResponse>(contentString, options);
+        var responseModel = JsonSerializer.Deserialize<CreatePaymentGatewayResult>(contentString, options);
 
-        responseModel!.Data.Should().NotBeNull();
-        responseModel.Data!.Id.Should().NotBeEmpty();
-        responseModel.Error.Should().BeNull();
-        responseModel.HasError.Should().BeFalse();
-        
+        responseModel.Should().NotBeNull();
+        responseModel!.Id.Should().NotBeEmpty();
     }
 }

@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using PayConnect.Application.DependecyInjection;
 using PayConnect.Infrastructure.EntityFramework.Context;
 using PayConnect.Infrastructure.EntityFramework.DependecyInjection;
+using PayConnect.Payment.WebApi.DependecyInjection;
+using PayConnect.Payment.WebApi.MIddlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddApplication();
-
+builder.Services.AddPresentation();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -18,6 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

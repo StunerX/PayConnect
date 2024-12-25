@@ -1,5 +1,7 @@
+using AutoMapper;
 using Bogus;
 using Microsoft.EntityFrameworkCore;
+using PayConnect.Application.Mapping;
 using PayConnect.Domain.Entities;
 using PayConnect.Infrastructure.EntityFramework;
 using PayConnect.Infrastructure.EntityFramework.Context;
@@ -30,6 +32,16 @@ public abstract class BaseFixture
         var httpClient = webFactory.CreateClient();
         var apiClient = new ApiClient(httpClient);
         return apiClient;
+    }
+    
+    public IMapper CreateMapper()
+    {
+        var configuration = new MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile<PaymentGatewayApplicationProfile>();
+        });
+
+        return configuration.CreateMapper();
     }
     
 }
