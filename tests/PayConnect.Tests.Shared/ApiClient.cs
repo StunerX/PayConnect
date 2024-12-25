@@ -26,4 +26,15 @@ public class ApiClient
         var response = await _httpClient.PostAsync(route, requestContent);
         return response;
     }
+    
+    public async Task<HttpResponseMessage> GetAsync(string route, string? accessToken = null)
+    {
+        if (!string.IsNullOrWhiteSpace(accessToken))
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        }
+        
+        var response = await _httpClient.GetAsync(route);
+        return response;
+    }
 }

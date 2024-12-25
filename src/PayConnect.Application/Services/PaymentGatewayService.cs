@@ -1,6 +1,7 @@
 using AutoMapper;
 using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 using PayConnect.Application.Dto.PaymentGateway.Create.Output;
+using PayConnect.Application.Dto.PaymentGateway.GetPaymentGatewayById.Output;
 using PayConnect.Application.Interfaces;
 using PayConnect.Domain.Entities;
 using PayConnect.Domain.Interfaces;
@@ -18,5 +19,11 @@ public class PaymentGatewayService(IUnitOfWork unitOfWork, IPaymentGatewayDomain
         await unitOfWork.CommitAsync();
         
         return mapper.Map<CreatePaymentGatewayOutModel>(entity);
+    }
+
+    public async Task<GetPaymentGatewayByIdOutModel> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var entity = await unitOfWork.PaymentGatewayRepository.FirstAsync(x => x.Id == id);
+        return mapper.Map<GetPaymentGatewayByIdOutModel>(entity);
     }
 }
