@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PayConnect.Application.DependecyInjection;
 using PayConnect.Infrastructure.EntityFramework.Context;
 using PayConnect.Infrastructure.EntityFramework.DependecyInjection;
+using PayConnect.Payment.WebApi.MIddlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
