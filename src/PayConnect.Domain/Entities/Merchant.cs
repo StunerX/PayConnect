@@ -17,7 +17,7 @@ public class Merchant : Entity
     
     public static Merchant Create(string name, string legalName, string email, string phone, string document, string country, string currency)
     {
-        Validate(name);
+        Validate(name, legalName);
         
         return new Merchant
         {
@@ -33,8 +33,10 @@ public class Merchant : Entity
         };
     }
 
-    private static void Validate(string name)
+    private static void Validate(string name, string legalName)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new DomainException("Name is required");
+        
+        if (string.IsNullOrWhiteSpace(legalName)) throw new DomainException("LegalName is required");
     }
 }

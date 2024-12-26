@@ -30,18 +30,26 @@ public class MerchantTests(MerchantTestsFixture fixture) : IClassFixture<Merchan
         merchant.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromMilliseconds(50));
     }
     
-    [Fact]
-    public void Create_ShouldThrowException_WhenNameIsNullOrEmpty()
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(null)]
+    public void Create_ShouldThrowException_WhenNameIsNullOrEmpty(string name)
     {
-        string? invalidName = null;
-        var validLegalName = fixture.Faker.Company.CompanyName();
-        var validEmail = fixture.Faker.Internet.Email();
-        var validPhone = fixture.Faker.Phone.PhoneNumber();
-        var validDocument = fixture.Faker.Random.String2(14);
-        var validCountry = fixture.Faker.Address.Country();
-        var validCurrency = fixture.Faker.Finance.Currency().Code;
-
-        var action = () => Merchant.Create(invalidName!, validLegalName, validEmail, validPhone, validDocument, validCountry, validCurrency);
+        var builder = fixture.MerchantBuilder.WithName(name);
+        var action = () => builder.Build();
         action.Should().Throw<DomainException>().WithMessage("Name is required");
+    }
+    
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(null)]
+    public void Create_ShouldThrowException_WhenLegalNameIsNullOrEmpty(string legalName)
+    {
+        var builder = fixture.MerchantBuilder.WithLegalName(legalName);
+        var action = () => builder.Build();
+
+        action.Should().Throw<DomainException>().WithMessage("LegalName is required");
     }
 }
