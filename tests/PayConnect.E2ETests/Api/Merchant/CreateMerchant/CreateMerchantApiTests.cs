@@ -15,7 +15,7 @@ public class CreateMerchantApiTests(CreateMerchantApiTestsFixture fixture) : ICl
 
         var client = fixture.ApiClient;
 
-        var response = await client.PostAsync("/Merchant", request);
+        var response = await client.PostAsync("/api/merchants", request);
         response.StatusCode.Should().Be(HttpStatusCode.Created);
         
         var contentString = await response.Content.ReadAsStringAsync();

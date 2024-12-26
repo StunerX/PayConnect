@@ -22,7 +22,7 @@ public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsIntegratio
 
         var client = integrationFixture.ApiClient;
 
-        var response = await client.PostAsync("/PaymentGateway", request);
+        var response = await client.PostAsync("/api/payment-gateways", request);
         response.StatusCode.Should().Be(HttpStatusCode.Created);
         
         var contentString = await response.Content.ReadAsStringAsync();

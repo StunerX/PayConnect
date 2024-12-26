@@ -1,7 +1,6 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 using PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 using PayConnect.Application.UseCases.PaymentGateway.GetPaymentGatewayById;
 using PayConnect.Payment.WebApi.Contracts.PaymentGateway.Create;
@@ -12,8 +11,8 @@ using WebApi.Hal;
 namespace PayConnect.Payment.WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class PaymentGatewayController(IMediator mediator, IMapper mapper) : ControllerBase
+[Route("api/payment-gateways")]
+public class PaymentGatewaysController(IMediator mediator, IMapper mapper) : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]

@@ -23,7 +23,7 @@ public class GetPaymentGatewayByIdApiTests(GetPaymentGatewayByIdApiTestsIntegrat
         var client = integrationFixture.ApiClient;
 
         // Act
-        var response = await client.GetAsync("/PaymentGateway/" + paymentGatewayEntity.Id);
+        var response = await client.GetAsync("/api/payment-gateways/" + paymentGatewayEntity.Id);
 
         var options = new JsonSerializerOptions
         {

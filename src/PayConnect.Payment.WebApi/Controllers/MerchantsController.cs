@@ -8,8 +8,8 @@ using PayConnect.Payment.WebApi.Shared;
 namespace PayConnect.Payment.WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class MerchantController(IMediator mediator, IMapper mapper) : ControllerBase
+[Route("api/merchants")]
+public class MerchantsController(IMediator mediator, IMapper mapper) : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
