@@ -12,10 +12,12 @@ public static class ServiceInjection
     {
         #region ApplicationServices
         services.AddScoped<IPaymentGatewayService, PaymentGatewayService>();
+        services.AddScoped<IMerchantService, MerchantService>();
         #endregion
 
         #region DomainServices
         services.AddScoped<IPaymentGatewayDomainService, PaymentGatewayDomainService>();
+        services.AddScoped<IMerchantDomainService, MerchantDomainService>();
         #endregion
         
         return services;

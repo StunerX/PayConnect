@@ -24,7 +24,8 @@ public abstract class BaseIntegrationFixture
     public UnitOfWork CreateUnitOfWork(ApplicationDbContext dbContext)
     {
         var paymentGatewayRepository = new Repository<PaymentGateway>(dbContext);
-        return new UnitOfWork(dbContext, paymentGatewayRepository);
+        var merchantRepository = new Repository<Merchant>(dbContext);
+        return new UnitOfWork(dbContext, paymentGatewayRepository, merchantRepository);
     }
     
     public ApiClient CreateApiClient<TStartup>(CustomWebApplicationFactory<TStartup> webFactory) where TStartup : class
@@ -39,6 +40,7 @@ public abstract class BaseIntegrationFixture
         var configuration = new MapperConfiguration(cfg =>
         {
             cfg.AddProfile<PaymentGatewayApplicationProfile>();
+            cfg.AddProfile<MerchantMappingApplicationProfile>();
         });
 
         return configuration.CreateMapper();
