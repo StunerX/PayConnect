@@ -37,6 +37,8 @@ public class Merchant : Entity
     {
         if (string.IsNullOrWhiteSpace(name)) throw new DomainException("Name is required");
         
+        if (name.Length > 100) throw new DomainException("Name length must be less than or equal to 100 characters");
+        
         if (string.IsNullOrWhiteSpace(legalName)) throw new DomainException("LegalName is required");
     }
 }
