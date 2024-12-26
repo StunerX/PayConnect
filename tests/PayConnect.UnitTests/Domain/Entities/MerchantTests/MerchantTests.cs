@@ -22,7 +22,7 @@ public class MerchantTests(MerchantTestsFixture fixture) : IClassFixture<Merchan
         merchant.Id.Should().NotBe(Guid.Empty);
         merchant.Name.Should().Be(name);
         merchant.LegalName.Should().Be(legalName);
-        merchant.Email.Should().Be(email);
+        merchant.Email.Address.Should().Be(email);
         merchant.Phone.Should().Be(phone);
         merchant.Document.Should().Be(document);
         merchant.Country.Should().Be(country);
@@ -60,5 +60,27 @@ public class MerchantTests(MerchantTestsFixture fixture) : IClassFixture<Merchan
         var action = () => builder.Build();
 
         action.Should().Throw<DomainException>().WithMessage("LegalName is required");
+    }
+    
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(null)]
+    public void Create_ShouldThrowException_WhenEmailIsNullOrEmpty(string email)
+    {
+        var builder = fixture.MerchantBuilder.WithEmail(email);
+        var action = () => builder.Build();
+        
+        action.Should().Throw<DomainException>().WithMessage("Email address cannot be empty");
+    }
+    
+    [Fact]
+    public void Create_ShouldThrowException_WhenInvalidEmailIsProvided()
+    {
+        var email = fixture.Faker.Random.String2(10);
+        var builder = fixture.MerchantBuilder.WithEmail(email);
+        var action = () => builder.Build();
+        
+        action.Should().Throw<DomainException>().WithMessage("Invalid email format");
     }
 }
