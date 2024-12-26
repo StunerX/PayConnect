@@ -41,6 +41,15 @@ public class MerchantTests(MerchantTestsFixture fixture) : IClassFixture<Merchan
         action.Should().Throw<DomainException>().WithMessage("Name is required");
     }
     
+    [Fact]
+    public void Create_ShouldThrowsException_WhenNameIsGreaterThan100Characters()
+    {
+        var name = fixture.Faker.Random.String2(101);
+        var builder = fixture.MerchantBuilder.WithName(name);
+        var action = () => builder.Build();
+        action.Should().Throw<DomainException>().WithMessage("Name length must be less than or equal to 100 characters");
+    }
+    
     [Theory]
     [InlineData("")]
     [InlineData(" ")]

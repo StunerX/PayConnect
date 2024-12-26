@@ -1,16 +1,20 @@
+using Bogus;
+using Bogus.Extensions.Brazil;
 using PayConnect.Domain.Entities;
 
 namespace PayConnect.UnitTests.Common;
 
 public class MerchantBuilder
 {
-    private string _name = "Default Name";
-    private string _legalName = "Default Legal Name";
-    private string _email = "default@example.com";
-    private string _phone = "123456789";
-    private string _document = "12345678901234";
-    private string _country = "Default Country";
-    private string _currency = "USD";
+    private static readonly Faker Faker = new Faker("pt_BR");
+    
+    private string _name = Faker.Name.FullName();
+    private string _legalName = Faker.Company.CompanyName();
+    private string _email = Faker.Internet.Email();
+    private string _phone = Faker.Phone.PhoneNumber();
+    private string _document = Faker.Company.Cnpj();
+    private string _country = Faker.Address.Country();
+    private string _currency = Faker.Finance.Currency().Code;
 
     public MerchantBuilder WithName(string name) { _name = name; return this; }
     public MerchantBuilder WithLegalName(string legalName) { _legalName = legalName; return this; }
