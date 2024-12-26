@@ -6,21 +6,21 @@ using PayConnect.Payment.WebApi.Contracts.PaymentGateway.GetById;
 
 namespace PayConnect.E2ETests.Api.PaymentGateway.GetPaymentGatewayById;
 
-[Collection(nameof(GetPaymentGatewayByIdApiTestsFixture))]
-public class GetPaymentGatewayByIdApiTests(GetPaymentGatewayByIdApiTestsFixture fixture)
+[Collection(nameof(GetPaymentGatewayByIdApiTestsIntegrationFixture))]
+public class GetPaymentGatewayByIdApiTests(GetPaymentGatewayByIdApiTestsIntegrationFixture integrationFixture)
 {
     [Fact]
     public async Task GetPaymentGatewayById_ShouldReturnPaymentGateway()
     {
         // Arrange
-        var dbContext = await fixture.CreateE2EDatabaseAsync();
+        var dbContext = await integrationFixture.CreateE2EDatabaseAsync();
         var paymentGatewayEntity = Domain.Entities.PaymentGateway.Create("Test", "Test", "Test");
 
         await dbContext.PaymentGateway.AddAsync(paymentGatewayEntity);
 
         await dbContext.SaveChangesAsync();
        
-        var client = fixture.ApiClient;
+        var client = integrationFixture.ApiClient;
 
         // Act
         var response = await client.GetAsync("/PaymentGateway/" + paymentGatewayEntity.Id);

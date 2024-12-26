@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PayConnect.Tests.Shared;
 
-public class DatabaseFixture : BaseFixture, IAsyncLifetime
+public class DatabaseIntegrationFixture : BaseIntegrationFixture, IAsyncLifetime
 {
     private const string Image = "postgres:latest";
     private readonly string _containerName;
@@ -20,7 +20,7 @@ public class DatabaseFixture : BaseFixture, IAsyncLifetime
     private readonly DockerClient _dockerClient;
     public string ConnectionString { get; private set; }
 
-    public DatabaseFixture()
+    public DatabaseIntegrationFixture()
     {
         _containerName = $"e2e_tests_db_{Guid.NewGuid():N}";
         _hostPort = GetRandomPort();

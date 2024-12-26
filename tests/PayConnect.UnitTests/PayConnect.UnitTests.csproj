@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\PayConnect.Domain\PayConnect.Domain.csproj" />
+      <ProjectReference Include="..\PayConnect.Tests.Shared\PayConnect.Tests.Shared.csproj" />
     </ItemGroup>
 
 </Project>

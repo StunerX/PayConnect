@@ -3,17 +3,17 @@ using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 
 namespace PayConnect.IntegrationTests.Application.Services.PaymentGatewayService;
 
-[Collection(nameof(CreatePaymentGatewayServiceIntegrationTestsFixture))]
-public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewayServiceIntegrationTestsFixture fixture)
+[Collection(nameof(CreatePaymentGatewayServiceIntegrationTestsIntegrationFixture))]
+public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewayServiceIntegrationTestsIntegrationFixture integrationFixture)
 {
     [Fact]
     public async Task Should_Create_PaymentGateway()
     {
-        var dbContext = fixture.CreateInMemoryDatabase();
-        var unitOfWork = fixture.CreateUnitOfWork(dbContext);
+        var dbContext = integrationFixture.CreateInMemoryDatabase();
+        var unitOfWork = integrationFixture.CreateUnitOfWork(dbContext);
         var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var mapper = fixture.CreateMapper();
+        var mapper = integrationFixture.CreateMapper();
 
         var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService, mapper);
 
@@ -37,11 +37,11 @@ public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewaySer
     [Fact]
     public async Task Should_Throw_DomainException_When_PaymentGateway_Exists()
     {
-        var dbContext = fixture.CreateInMemoryDatabase();
-        var unitOfWork = fixture.CreateUnitOfWork(dbContext);
+        var dbContext = integrationFixture.CreateInMemoryDatabase();
+        var unitOfWork = integrationFixture.CreateUnitOfWork(dbContext);
         var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var mapper = fixture.CreateMapper();
+        var mapper = integrationFixture.CreateMapper();
         var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService, mapper);
 
         var inModel = new CreatePaymentGatewayInModel
@@ -61,11 +61,11 @@ public class CreatePaymentGatewayServiceIntegrationTests(CreatePaymentGatewaySer
     [Fact]
     public async Task Should_Get_PaymentGateway_By_Id()
     {
-        var dbContext = fixture.CreateInMemoryDatabase();
-        var unitOfWork = fixture.CreateUnitOfWork(dbContext);
+        var dbContext = integrationFixture.CreateInMemoryDatabase();
+        var unitOfWork = integrationFixture.CreateUnitOfWork(dbContext);
         var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var mapper = fixture.CreateMapper();
+        var mapper = integrationFixture.CreateMapper();
         var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService, mapper);
 
         var inModel = new CreatePaymentGatewayInModel

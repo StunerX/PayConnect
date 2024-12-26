@@ -6,13 +6,13 @@ using PayConnect.Payment.WebApi.Contracts.PaymentGateway.Create;
 
 namespace PayConnect.E2ETests.Api.PaymentGateway.CreatePayamentGateway;
 
-[Collection(nameof(CreatePaymentGatewayApiTestsFixture))]
-public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsFixture fixture)
+[Collection(nameof(CreatePaymentGatewayApiTestsIntegrationFixture))]
+public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsIntegrationFixture integrationFixture)
 {
     [Fact]
     public async Task Post_PaymentGateway_ShouldReturnCreated()
     {
-        await fixture.CreateE2EDatabaseAsync();
+        await integrationFixture.CreateE2EDatabaseAsync();
         var request = new CreatePaymentGatewayRequest
         {
             Name = "Test",
@@ -20,7 +20,7 @@ public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsFixture fi
             Image = "Test",
         };
 
-        var client = fixture.ApiClient;
+        var client = integrationFixture.ApiClient;
 
         var response = await client.PostAsync("/PaymentGateway", request);
         response.StatusCode.Should().Be(HttpStatusCode.Created);
