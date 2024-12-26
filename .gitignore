@@ -45,6 +45,8 @@ node_modules/
 
 # Ignorar appsettings locais (opcional, apenas se conter segredos)
 appsettings.Development.json
+appsettings.Staging.json
+appsettings.E2ETest.json
 launchSettings.json
 
 *.http

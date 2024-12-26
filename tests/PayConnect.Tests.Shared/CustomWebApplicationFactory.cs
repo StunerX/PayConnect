@@ -12,8 +12,6 @@ public class CustomWebApplicationFactory<TStartup>(string connectionString) : We
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseEnvironment("E2ETest");
-
         builder.ConfigureAppConfiguration((context, configBuilder) =>
         {
             Console.WriteLine($"Using connection string: {connectionString}");
