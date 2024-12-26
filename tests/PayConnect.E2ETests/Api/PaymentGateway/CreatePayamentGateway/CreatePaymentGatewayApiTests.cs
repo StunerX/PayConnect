@@ -1,7 +1,6 @@
 using System.Net;
 using System.Text.Json;
 using FluentAssertions;
-using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 using PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 using PayConnect.Payment.WebApi.Contracts.PaymentGateway.Create;
 
@@ -14,7 +13,6 @@ public class CreatePaymentGatewayApiTests(CreatePaymentGatewayApiTestsFixture fi
     public async Task Post_PaymentGateway_ShouldReturnCreated()
     {
         await fixture.CreateE2EDatabaseAsync();
-
         var request = new CreatePaymentGatewayRequest
         {
             Name = "Test",
