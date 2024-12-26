@@ -12,7 +12,7 @@ public class MerchantBuilder
     private string _legalName = Faker.Company.CompanyName();
     private string _email = Faker.Internet.Email();
     private string _phone = Faker.Phone.PhoneNumber();
-    private string _document = Faker.Company.Cnpj();
+    private string _document = Faker.Company.Cnpj(includeFormatSymbols:false);
     private string _country = Faker.Address.Country();
     private string _currency = Faker.Finance.Currency().Code;
 
