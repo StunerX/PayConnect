@@ -21,6 +21,8 @@ public class MerchantsController(IMediator mediator, IMapper mapper) : Controlle
         var result = await mediator.Send(command);
 
         var response = mapper.Map<CreateMerchantResponse>(result);
+        
+        response.GenerateLinks();
        
         return Created(string.Empty, response);
     }
