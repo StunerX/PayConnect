@@ -32,7 +32,7 @@ public class CreateMerchantUseCaseTests(CreateMerchantUseCaseTestsFixture fixtur
         result.LegalName.Should().Be(merchant.LegalName);
         result.Email.Should().Be(merchant.Email.Address);
         result.Phone.Should().Be(merchant.Phone);
-        result.Document.Should().Be(merchant.Document);
+        result.Document.Should().Be(merchant.Document.Id);
         result.Country.Should().Be(merchant.Country);
         result.Currency.Should().Be(merchant.Currency);
         result.WebhookUrl.Should().Be(merchant.WebhookUrl);

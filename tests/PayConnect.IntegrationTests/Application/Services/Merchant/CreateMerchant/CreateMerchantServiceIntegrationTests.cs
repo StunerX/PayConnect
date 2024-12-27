@@ -31,7 +31,7 @@ public class CreateMerchantServiceIntegrationTests(CreateMerchantServiceIntegrat
         outModel.LegalName.Should().Be(entity.LegalName);
         outModel.Email.Should().Be(entity.Email.Address);
         outModel.Phone.Should().Be(entity.Phone);
-        outModel.Document.Should().Be(entity.Document);
+        outModel.Document.Should().Be(entity.Document.Id);
         outModel.Country.Should().Be(entity.Country);
         outModel.Currency.Should().Be(entity.Currency);
         outModel.WebhookUrl.Should().Be(entity.WebhookUrl);

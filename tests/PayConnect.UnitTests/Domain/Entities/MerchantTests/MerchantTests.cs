@@ -24,7 +24,7 @@ public class MerchantTests(MerchantTestsFixture fixture) : IClassFixture<Merchan
         merchant.LegalName.Should().Be(legalName);
         merchant.Email.Address.Should().Be(email);
         merchant.Phone.Should().Be(phone);
-        merchant.Document.Should().Be(document);
+        merchant.Document.Id.Should().Be(document);
         merchant.Country.Should().Be(country);
         merchant.Currency.Should().Be(currency);
         merchant.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromMilliseconds(50));
@@ -82,5 +82,14 @@ public class MerchantTests(MerchantTestsFixture fixture) : IClassFixture<Merchan
         var action = () => builder.Build();
         
         action.Should().Throw<DomainException>().WithMessage("Invalid email format");
+    }
+    
+    [Fact]
+    public void Create_ShouldThrowException_WhenDocumentIsNullOrEmpty()
+    {
+        var builder = fixture.MerchantBuilder.WithDocument("");
+        var action = () => builder.Build();
+        
+        action.Should().Throw<DomainException>().WithMessage("Document is required");
     }
 }

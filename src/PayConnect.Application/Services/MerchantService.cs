@@ -19,6 +19,6 @@ public class MerchantService(IMerchantDomainService domainService, IUnitOfWork u
 
         await unitOfWork.CommitAsync();
         
-        return mapper.Map<CreateMerchantOutModel>(merchant);
+        return mapper.Map<CreateMerchantOutModel>(merchant);;
     }
 }

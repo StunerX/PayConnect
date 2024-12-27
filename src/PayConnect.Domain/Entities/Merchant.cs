@@ -10,7 +10,7 @@ public class Merchant : Entity
     public required string LegalName { get; init; }
     public required Email Email { get; init; }
     public required string Phone { get; init; }
-    public required string Document { get; init; }
+    public required Document Document { get; init; }
     public required string Country { get; init; }
     public required string Currency { get; init; }
     public string? WebhookUrl { get; private set; }
@@ -27,7 +27,7 @@ public class Merchant : Entity
             LegalName = legalName,
             Email = Email.Create(email),
             Phone = phone,
-            Document = document,
+            Document = Document.Create(document),
             Country = country,
             Currency = currency,
             CreatedAt = DateTime.UtcNow

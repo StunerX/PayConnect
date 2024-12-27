@@ -18,7 +18,7 @@ public class CreateMerchantApiTestsFixture : E2EPaymentWebApiBaseIntegrationFixt
             LegalName = merchant.LegalName,
             Email = merchant.Email.Address,
             Phone = merchant.Phone,
-            Document = merchant.Document,
+            Document = merchant.Document.Id,
             Country = merchant.Country,
             Currency = merchant.Currency
         };
