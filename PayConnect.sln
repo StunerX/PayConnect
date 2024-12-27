@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Tests.Shared", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.E2ETests", "tests\PayConnect.E2ETests\PayConnect.E2ETests.csproj", "{96AFB888-26AD-4F32-AA3D-8D43521DB3B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayConnect.Presentation.Shared", "src\PayConnect.Presentation.Shared\PayConnect.Presentation.Shared.csproj", "{47479C3C-406E-4373-B426-2C78938FCE9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,7 @@ Global
 		{BF57A7CA-CD8A-46D7-B665-199948394431} = {D726C854-1E14-4B7B-9B01-17A2603C12B2}
 		{D8709FAF-A8B8-4DFE-8B26-D8056B74E9E5} = {D726C854-1E14-4B7B-9B01-17A2603C12B2}
 		{96AFB888-26AD-4F32-AA3D-8D43521DB3B6} = {D726C854-1E14-4B7B-9B01-17A2603C12B2}
+		{47479C3C-406E-4373-B426-2C78938FCE9B} = {A1293704-842D-4011-99D7-4EA2165F0845}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{312E660F-069D-47E8-B5AF-40AF7BEDDB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -99,5 +102,9 @@ Global
 		{96AFB888-26AD-4F32-AA3D-8D43521DB3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96AFB888-26AD-4F32-AA3D-8D43521DB3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96AFB888-26AD-4F32-AA3D-8D43521DB3B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47479C3C-406E-4373-B426-2C78938FCE9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47479C3C-406E-4373-B426-2C78938FCE9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47479C3C-406E-4373-B426-2C78938FCE9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47479C3C-406E-4373-B426-2C78938FCE9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

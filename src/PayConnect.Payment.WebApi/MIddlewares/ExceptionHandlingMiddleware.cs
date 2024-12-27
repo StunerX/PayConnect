@@ -1,5 +1,4 @@
 using System.Net;
-using Newtonsoft.Json;
 using PayConnect.Domain.Exceptions;
 using PayConnect.Payment.WebApi.Shared;
 

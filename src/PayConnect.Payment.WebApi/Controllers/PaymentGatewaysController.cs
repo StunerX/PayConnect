@@ -6,7 +6,6 @@ using PayConnect.Application.UseCases.PaymentGateway.GetPaymentGatewayById;
 using PayConnect.Payment.WebApi.Contracts.PaymentGateway.Create;
 using PayConnect.Payment.WebApi.Contracts.PaymentGateway.GetById;
 using PayConnect.Payment.WebApi.Shared;
-using WebApi.Hal;
 
 namespace PayConnect.Payment.WebApi.Controllers;
 
@@ -24,11 +23,9 @@ public class PaymentGatewaysController(IMediator mediator, IMapper mapper) : Con
         var result = await mediator.Send(command);
 
         var response = mapper.Map<CreatePaymentGatewayResponse>(result);
-        var self = Url.Action(nameof(GetById), new { id = response.Id });
+        response.GenerateLinks();
 
-        response.Links.Add(new Link("self", self));
-
-        return Created(self, response);
+        return Created(nameof(GetById), response);
     }
 
     [HttpGet("{id}")]
@@ -41,6 +38,7 @@ public class PaymentGatewaysController(IMediator mediator, IMapper mapper) : Con
         var result = await mediator.Send(query);
         
         var response = mapper.Map<GetPaymentGatewayByIdResponse>(result);
+        response.GenerateLinks();
         
         return Ok(response);
     }

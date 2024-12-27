@@ -1,5 +1,4 @@
 #nullable disable
-using WebApi.Hal;
 
 namespace PayConnect.Payment.WebApi.Contracts.PaymentGateway.Merchant.Create;
 
@@ -14,10 +13,5 @@ public class CreateMerchantResponse
     public string Country { get; set; }
     public string Currency { get; set; }
     public DateTime CreatedAt { get; set; }
-    public List<Link> Links { get; set; } = [];
-
-    public void AddLink(string rel, string href, string method)
-    {
-        Links.Add(new Link(rel, href, method));
-    }
+  
 }
