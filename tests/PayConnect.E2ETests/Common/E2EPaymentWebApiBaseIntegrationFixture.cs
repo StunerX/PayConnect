@@ -2,7 +2,7 @@ using PayConnect.Tests.Shared;
 
 namespace PayConnect.E2ETests.Common;
 
-public class E2EPaymentWebApiBaseFixture : DatabaseFixture, IAsyncLifetime
+public class E2EPaymentWebApiBaseIntegrationFixture : DatabaseIntegrationFixture, IAsyncLifetime
 {
     private CustomWebApplicationFactory<Program> WebApplicationFactory { get; set; }
     

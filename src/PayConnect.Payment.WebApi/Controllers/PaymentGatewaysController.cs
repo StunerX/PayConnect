@@ -1,19 +1,17 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PayConnect.Application.Dto.PaymentGateway.Create.Input;
 using PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 using PayConnect.Application.UseCases.PaymentGateway.GetPaymentGatewayById;
 using PayConnect.Payment.WebApi.Contracts.PaymentGateway.Create;
 using PayConnect.Payment.WebApi.Contracts.PaymentGateway.GetById;
 using PayConnect.Payment.WebApi.Shared;
-using WebApi.Hal;
 
 namespace PayConnect.Payment.WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class PaymentGatewayController(IMediator mediator, IMapper mapper) : ControllerBase
+[Route("api/payment-gateways")]
+public class PaymentGatewaysController(IMediator mediator, IMapper mapper) : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -25,11 +23,9 @@ public class PaymentGatewayController(IMediator mediator, IMapper mapper) : Cont
         var result = await mediator.Send(command);
 
         var response = mapper.Map<CreatePaymentGatewayResponse>(result);
-        var self = Url.Action(nameof(GetById), new { id = response.Id });
+        response.GenerateLinks();
 
-        response.Links.Add(new Link("self", self));
-
-        return Created(self, response);
+        return Created(nameof(GetById), response);
     }
 
     [HttpGet("{id}")]
@@ -42,6 +38,7 @@ public class PaymentGatewayController(IMediator mediator, IMapper mapper) : Cont
         var result = await mediator.Send(query);
         
         var response = mapper.Map<GetPaymentGatewayByIdResponse>(result);
+        response.GenerateLinks();
         
         return Ok(response);
     }

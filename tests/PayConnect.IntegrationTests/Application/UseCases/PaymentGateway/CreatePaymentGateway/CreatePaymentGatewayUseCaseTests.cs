@@ -6,17 +6,17 @@ using PayConnect.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 
 namespace PayConnect.IntegrationTests.Application.UseCases.PaymentGateway.CreatePaymentGateway;
 
-[Collection(nameof(CreatePaymentGatewayUseCaseTestsFixture))]
-public class CreatePaymentGatewayUseCaseTests(CreatePaymentGatewayUseCaseTestsFixture fixture)
+[Collection(nameof(CreatePaymentGatewayUseCaseTestsIntegrationFixture))]
+public class CreatePaymentGatewayUseCaseTests(CreatePaymentGatewayUseCaseTestsIntegrationFixture integrationFixture)
 {
     [Fact]
     public async Task Should_Create_PaymentGateway()
     {
-        var dbContext = fixture.CreateInMemoryDatabase();
-        var unitOfWork = fixture.CreateUnitOfWork(dbContext);
+        var dbContext = integrationFixture.CreateInMemoryDatabase();
+        var unitOfWork = integrationFixture.CreateUnitOfWork(dbContext);
         var domainService = new PayConnect.Domain.Services.PaymentGatewayDomainService(unitOfWork);
         
-        var mapper = fixture.CreateMapper();
+        var mapper = integrationFixture.CreateMapper();
         
         var paymentGatewayService = new PayConnect.Application.Services.PaymentGatewayService(unitOfWork, domainService, mapper);
         

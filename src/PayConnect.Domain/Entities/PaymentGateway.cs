@@ -1,19 +1,17 @@
+using PayConnect.Domain.Common;
 using PayConnect.Domain.Exceptions;
 
 namespace PayConnect.Domain.Entities;
 
-public class PaymentGateway
+public class PaymentGateway : Entity
 {
     public PaymentGateway()
     {
     }
     
-    public Guid Id { get; private set; }
     public required string Name { get; init; }
     public required string BaseUrl { get; init; }
     public required string Image { get; init; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime? UpdatedAt { get; private set; }
     
     public static PaymentGateway Create(string name, string baseUrl, string image)
     {

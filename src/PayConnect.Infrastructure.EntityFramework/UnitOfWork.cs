@@ -4,9 +4,10 @@ using PayConnect.Infrastructure.EntityFramework.Context;
 
 namespace PayConnect.Infrastructure.EntityFramework;
 
-public class UnitOfWork(ApplicationDbContext dbContext, IRepository<PaymentGateway> paymentGatewayRepository) : IUnitOfWork
+public class UnitOfWork(ApplicationDbContext dbContext, IRepository<PaymentGateway> paymentGatewayRepository, IRepository<Merchant> merchantRepository) : IUnitOfWork
 {
     public IRepository<PaymentGateway> PaymentGatewayRepository { get; } = paymentGatewayRepository;
+    public IRepository<Merchant> MerchantRepository { get; } = merchantRepository;
     
     public async Task CommitAsync()
     {
