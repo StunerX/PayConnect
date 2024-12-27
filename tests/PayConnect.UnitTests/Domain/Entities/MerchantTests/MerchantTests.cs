@@ -90,6 +90,6 @@ public class MerchantTests(MerchantTestsFixture fixture) : IClassFixture<Merchan
         var builder = fixture.MerchantBuilder.WithDocument("");
         var action = () => builder.Build();
         
-        action.Should().Throw<DomainException>().WithMessage("Document is required");
+        action.Should().Throw<DomainException>().WithMessage("Document id cannot be empty");
     }
 }
