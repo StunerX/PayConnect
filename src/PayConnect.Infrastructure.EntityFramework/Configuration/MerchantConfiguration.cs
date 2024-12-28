@@ -21,10 +21,8 @@ public class MerchantConfiguration : IEntityTypeConfiguration<Merchant>
         builder.Property(x => x.Phone).IsRequired().HasMaxLength(20);
         
         builder.Property(x => x.Document).HasConversion(document => document.Id, id => Document.Create(id))
-            .HasColumnName("Document").IsRequired().HasMaxLength(14);
-        
-        builder.Property(x => x.Document).HasConversion(document => document.Id, id => Document.Create(id))
-            .HasColumnName("Document").IsRequired().HasMaxLength(14);
+            .HasColumnName("Document").IsRequired().HasMaxLength(14);             
+
         
         builder.Property(x => x.Country).IsRequired().HasMaxLength(50);
         builder.Property(x => x.Currency).IsRequired().HasMaxLength(3);
