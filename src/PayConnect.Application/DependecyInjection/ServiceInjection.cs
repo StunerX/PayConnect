@@ -13,6 +13,7 @@ public static class ServiceInjection
         #region ApplicationServices
         services.AddScoped<IPaymentGatewayService, PaymentGatewayService>();
         services.AddScoped<IMerchantService, MerchantService>();
+        services.AddScoped<IGatewayConfigurationService, GatewayConfigurationService>();
         #endregion
 
         #region DomainServices

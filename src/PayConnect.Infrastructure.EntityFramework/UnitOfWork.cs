@@ -4,11 +4,16 @@ using PayConnect.Infrastructure.EntityFramework.Context;
 
 namespace PayConnect.Infrastructure.EntityFramework;
 
-public class UnitOfWork(ApplicationDbContext dbContext, IRepository<PaymentGateway> paymentGatewayRepository, IRepository<Merchant> merchantRepository) : IUnitOfWork
+public class UnitOfWork(
+    ApplicationDbContext dbContext,
+    IRepository<PaymentGateway> paymentGatewayRepository,
+    IRepository<Merchant> merchantRepository,
+    IRepository<GatewayConfiguration> gatewayConfigurationRepository) : IUnitOfWork
 {
     public IRepository<PaymentGateway> PaymentGatewayRepository { get; } = paymentGatewayRepository;
     public IRepository<Merchant> MerchantRepository { get; } = merchantRepository;
-    
+    public IRepository<GatewayConfiguration> GatewayConfigurationRepository { get; } = gatewayConfigurationRepository;
+
     public async Task CommitAsync()
     {
         await dbContext.SaveChangesAsync();
@@ -22,7 +27,7 @@ public class UnitOfWork(ApplicationDbContext dbContext, IRepository<PaymentGatew
         Dispose(true);
         GC.SuppressFinalize(this);
     }
-    
+
     /// <summary>
     /// Dispose
     /// </summary>

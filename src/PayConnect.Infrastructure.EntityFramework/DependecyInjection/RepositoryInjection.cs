@@ -10,6 +10,7 @@ public static class RepositoryInjection
     {
         services.AddScoped<IRepository<PaymentGateway>, Repository<PaymentGateway>>();
         services.AddScoped<IRepository<Merchant>, Repository<Merchant>>();
+        services.AddScoped<IRepository<GatewayConfiguration>, Repository<GatewayConfiguration>>();
         
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;

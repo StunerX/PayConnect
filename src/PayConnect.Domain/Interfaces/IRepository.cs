@@ -100,6 +100,12 @@ public interface IRepository<T> where T : class
     /// <returns></returns>
     Task AddAsync(T entity);
     /// <summary>
+    /// Adds list of entities
+    /// </summary>
+    /// <param name="entities"></param>
+    /// <returns></returns>
+    Task AddRangeAsync(IEnumerable<T> entities);
+    /// <summary>
     /// Removes an entity
     /// </summary>
     /// <param name="entity"></param>

@@ -25,7 +25,8 @@ public abstract class BaseIntegrationFixture
     {
         var paymentGatewayRepository = new Repository<PaymentGateway>(dbContext);
         var merchantRepository = new Repository<Merchant>(dbContext);
-        return new UnitOfWork(dbContext, paymentGatewayRepository, merchantRepository);
+        var gatewayConfigurationRepository = new Repository<GatewayConfiguration>(dbContext);
+        return new UnitOfWork(dbContext, paymentGatewayRepository, merchantRepository, gatewayConfigurationRepository);
     }
     
     public ApiClient CreateApiClient<TStartup>(CustomWebApplicationFactory<TStartup> webFactory) where TStartup : class

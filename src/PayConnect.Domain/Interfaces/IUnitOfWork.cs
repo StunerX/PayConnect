@@ -20,5 +20,13 @@ public interface IUnitOfWork : IDisposable
         get;
     }
     
+    /// <summary>
+    /// Gatway Configuration Entity repository
+    /// </summary>
+    IRepository<GatewayConfiguration> GatewayConfigurationRepository
+    {
+        get;
+    }
+    
     Task CommitAsync();
 }
