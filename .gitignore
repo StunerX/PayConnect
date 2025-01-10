@@ -47,7 +47,7 @@ node_modules/
 appsettings.Development.json
 appsettings.Staging.json
 appsettings.E2ETest.json
-launchSettings.json
+
 
 *.http
 *.vs
