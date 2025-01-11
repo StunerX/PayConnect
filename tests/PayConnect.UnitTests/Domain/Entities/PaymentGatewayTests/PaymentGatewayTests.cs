@@ -25,7 +25,7 @@ public class PaymentGatewayTests
         const string validBaseUri = "https://api.stripe.com";
         var validImageUrl = "https://example.com/stripe-logo.png";
 
-        var action = () => PaymentGateway.Create(invalidName, validBaseUri, validImageUrl);
+        var action = () => PaymentGateway.Create(invalidName!, validBaseUri, validImageUrl);
         action.Should().Throw<DomainException>().WithMessage("Name is required");
     }
     
